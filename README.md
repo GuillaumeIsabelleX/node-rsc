@@ -1,5 +1,18 @@
-Configure your Node.js Applications
+
+
+
+RSC
 ===================================
+
+
+
+
+
+
+
+
+
+
 
 [![NPM](https://nodei.co/npm/config.svg?downloads=true&downloadRank=true)](https://nodei.co/npm/config/)&nbsp;&nbsp;
 [![Build Status](https://secure.travis-ci.org/lorenwest/node-config.svg?branch=master)](https://travis-ci.org/lorenwest/node-config)&nbsp;&nbsp;
