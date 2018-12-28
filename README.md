@@ -8,12 +8,13 @@ RSCR - Really Simple Content Routing
 ### VISIONS ###
 
 * Really simple content is distributed thru a routing as embedable HTML
+```javascript
 ** ex.  rsc__get("afelia.logo") =>  "/img/ico/afelia.png"
 ** ex.  rsc__getLogo("afelia","html") =>  <img src=/img/ico/afelia.png class="rsc_logo afelia.logo">
 ** ex.  rsc__getLogo("main","html") =>  <img src=/img/ico/afelia.png class="rsc_logo afelia.logo">
 ** ex.  rsc__getLogo ("afelia","html",false) =>  <img src=http://afelia.jgwill.com/img/ico/afelia.png class="rsc_logo afelia.logo">
 ** ex.  rsc__getLogo ("","html",false) =>  <img src=http://afelia.jgwill.com/img/ico/afelia.png class="rsc_logo afelia.logo">
-
+```
 
 
 
