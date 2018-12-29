@@ -24,6 +24,24 @@ RSCR - Really Simple Content Routing
 
 
 
+### Reality ###
+
+```javascript
+//a file ./rsc/default.json 
+var rsc = require('node-rsc');
+
+
+var cnf = rsc.get("Logos");
+
+console.log(cnf.test);
+```
+```json
+{
+	"Logos": {
+		"test": "myval"
+	}
+}
+```
 
 
 
@@ -32,50 +50,53 @@ RSCR - Really Simple Content Routing
 
 
 
-[![NPM](https://nodei.co/npm/config.svg?downloads=true&downloadRank=true)](https://nodei.co/npm/config/)&nbsp;&nbsp;
-[![Build Status](https://secure.travis-ci.org/lorenwest/node-config.svg?branch=master)](https://travis-ci.org/lorenwest/node-config)&nbsp;&nbsp;
-[release notes](https://github.com/lorenwest/node-config/blob/master/History.md)
+
+
+
+[![NPM](https://nodei.co/npm/rsc.svg?downloads=true&downloadRank=true)](https://nodei.co/npm/rsc/)&nbsp;&nbsp;
+[![Build Status](https://secure.travis-ci.org/lorenwest/node-rsc.svg?branch=master)](https://travis-ci.org/lorenwest/node-rsc)&nbsp;&nbsp;
+[release notes](https://github.com/lorenwest/node-rsc/blob/master/History.md)
 
 Introduction
 ------------
 
-Node-config organizes hierarchical configurations for your app deployments.
+Node-rsc organizes hierarchical rscurations for your app deployments.
 
 It lets you define a set of default parameters,
 and extend them for different deployment environments (development, qa,
 staging, production, etc.).
 
-Configurations are stored in [configuration files](https://github.com/lorenwest/node-config/wiki/Configuration-Files) within your application, and can be overridden and extended by [environment variables](https://github.com/lorenwest/node-config/wiki/Environment-Variables),
- [command line parameters](https://github.com/lorenwest/node-config/wiki/Command-Line-Overrides), or [external sources](https://github.com/lorenwest/node-config/wiki/Configuring-from-an-External-Source).
+Rscurations are stored in [rscuration files](https://github.com/lorenwest/node-rsc/wiki/Rscuration-Files) within your application, and can be overridden and extended by [environment variables](https://github.com/lorenwest/node-rsc/wiki/Environment-Variables),
+ [command line parameters](https://github.com/lorenwest/node-rsc/wiki/Command-Line-Overrides), or [external sources](https://github.com/lorenwest/node-rsc/wiki/Rscuring-from-an-External-Source).
 
-This gives your application a consistent configuration interface shared among a
-[growing list of npm modules](https://www.npmjs.org/browse/depended/config) also using node-config.
+This gives your application a consistent rscuration interface shared among a
+[growing list of npm modules](https://www.npmjs.org/browse/depended/rsc) also using node-rsc.
 
 Project Guidelines
 ------------------
 
 * *Simple* - Get started fast
 * *Powerful* - For multi-node enterprise deployment
-* *Flexible* - Supporting multiple config file formats
+* *Flexible* - Supporting multiple rsc file formats
 * *Lightweight* - Small file and memory footprint
 * *Predictable* - Well tested foundation for module and app developers
 
 Quick Start
 ---------------
-The following examples are in JSON format, but configurations can be in other [file formats](https://github.com/lorenwest/node-config/wiki/Configuration-Files#file-formats).
+The following examples are in JSON format, but rscurations can be in other [file formats](https://github.com/lorenwest/node-rsc/wiki/Rscuration-Files#file-formats).
 
-**Install in your app directory, and edit the default config file.**
+**Install in your app directory, and edit the default rsc file.**
 
 ```shell
-$ npm install config
-$ mkdir config
-$ vi config/default.json
+$ npm install rsc
+$ mkdir rsc
+$ vi rsc/default.json
 ```
 ```js
 {
-  // Customer module configs
+  // Customer module rscs
   "Customer": {
-    "dbConfig": {
+    "dbRsc": {
       "host": "localhost",
       "port": 5984,
       "dbName": "customers"
@@ -89,16 +110,16 @@ $ vi config/default.json
 }
 ```
 
-**Edit config overrides for production deployment:**
+**Edit rsc overrides for production deployment:**
 
 ```shell
- $ vi config/production.json
+ $ vi rsc/production.json
 ```
 
 ```json
 {
   "Customer": {
-    "dbConfig": {
+    "dbRsc": {
       "host": "prod-db-server"
     },
     "credit": {
@@ -108,22 +129,22 @@ $ vi config/default.json
 }
 ```
 
-**Use configs in your code:**
+**Use rscs in your code:**
 
 ```js
-var config = require('config');
+var rsc = require('rsc');
 //...
-var dbConfig = config.get('Customer.dbConfig');
-db.connect(dbConfig, ...);
+var dbRsc = rsc.get('Customer.dbRsc');
+db.connect(dbRsc, ...);
 
-if (config.has('optionalFeature.detail')) {
-  var detail = config.get('optionalFeature.detail');
+if (rsc.has('optionalFeature.detail')) {
+  var detail = rsc.get('optionalFeature.detail');
   //...
 }
 ```
 
-`config.get()` will throw an exception for undefined keys to help catch typos and missing values.
-Use `config.has()` to test if a configuration value is defined.
+`rsc.get()` will throw an exception for undefined keys to help catch typos and missing values.
+Use `rsc.has()` to test if a rscuration value is defined.
 
 **Start your app server:**
 
@@ -132,36 +153,36 @@ $ export NODE_ENV=production
 $ node my-app.js
 ```
 
-Running in this configuration, the `port` and `dbName` elements of `dbConfig`
+Running in this rscuration, the `port` and `dbName` elements of `dbRsc`
 will come from the `default.json` file, and the `host` element will
 come from the `production.json` override file.
 
 Articles
 --------
 
-* [Configuration Files](https://github.com/lorenwest/node-config/wiki/Configuration-Files)
-  * [Special features for JavaScript configuration files](https://github.com/lorenwest/node-config/wiki/Special-features-for-JavaScript-configuration-files)
-* [Common Usage](https://github.com/lorenwest/node-config/wiki/Common-Usage)
-* [Environment Variables](https://github.com/lorenwest/node-config/wiki/Environment-Variables)
-* [Reserved Words](https://github.com/lorenwest/node-config/wiki/Reserved-Words)
-* [Command Line Overrides](https://github.com/lorenwest/node-config/wiki/Command-Line-Overrides)
-* [Multiple Node Instances](https://github.com/lorenwest/node-config/wiki/Multiple-Node-Instances)
-* [Sub-Module Configuration](https://github.com/lorenwest/node-config/wiki/Sub-Module-Configuration)
-* [Configuring from a DB / External Source](https://github.com/lorenwest/node-config/wiki/Configuring-from-an-External-Source)
-* [Securing Production Config Files](https://github.com/lorenwest/node-config/wiki/Securing-Production-Config-Files)
-* [External Configuration Management Tools](https://github.com/lorenwest/node-config/wiki/External-Configuration-Management-Tools)
-* [Examining Configuration Sources](https://github.com/lorenwest/node-config/wiki/Examining-Configuration-Sources)
-* [Using Config Utilities](https://github.com/lorenwest/node-config/wiki/Using-Config-Utilities)
-* [Upgrading from Config 0.x](https://github.com/lorenwest/node-config/wiki/Upgrading-From-Config-0.x)
-* [Webpack usage](https://github.com/lorenwest/node-config/wiki/Webpack-Usage)
+* [Rscuration Files](https://github.com/lorenwest/node-rsc/wiki/Rscuration-Files)
+  * [Special features for JavaScript rscuration files](https://github.com/lorenwest/node-rsc/wiki/Special-features-for-JavaScript-rscuration-files)
+* [Common Usage](https://github.com/lorenwest/node-rsc/wiki/Common-Usage)
+* [Environment Variables](https://github.com/lorenwest/node-rsc/wiki/Environment-Variables)
+* [Reserved Words](https://github.com/lorenwest/node-rsc/wiki/Reserved-Words)
+* [Command Line Overrides](https://github.com/lorenwest/node-rsc/wiki/Command-Line-Overrides)
+* [Multiple Node Instances](https://github.com/lorenwest/node-rsc/wiki/Multiple-Node-Instances)
+* [Sub-Module Rscuration](https://github.com/lorenwest/node-rsc/wiki/Sub-Module-Rscuration)
+* [Rscuring from a DB / External Source](https://github.com/lorenwest/node-rsc/wiki/Rscuring-from-an-External-Source)
+* [Securing Production Rsc Files](https://github.com/lorenwest/node-rsc/wiki/Securing-Production-Rsc-Files)
+* [External Rscuration Management Tools](https://github.com/lorenwest/node-rsc/wiki/External-Rscuration-Management-Tools)
+* [Examining Rscuration Sources](https://github.com/lorenwest/node-rsc/wiki/Examining-Rscuration-Sources)
+* [Using Rsc Utilities](https://github.com/lorenwest/node-rsc/wiki/Using-Rsc-Utilities)
+* [Upgrading from Rsc 0.x](https://github.com/lorenwest/node-rsc/wiki/Upgrading-From-Rsc-0.x)
+* [Webpack usage](https://github.com/lorenwest/node-rsc/wiki/Webpack-Usage)
 
 Further Information
 ---------------------
 If you still don't see what you are looking for, here more resources to check: 
 
- * The [wiki may have more pages](https://github.com/lorenwest/node-config/wiki) which are not directly linked from here.
- * Review [questions tagged with node-config](https://stackexchange.com/filters/207096/node-config) on StackExchange. These are monitored by `node-config` contributors.
- * [Search the issue tracker](https://github.com/lorenwest/node-config/issues). Hundreds of issues have already been discussed and resolved there.
+ * The [wiki may have more pages](https://github.com/lorenwest/node-rsc/wiki) which are not directly linked from here.
+ * Review [questions tagged with node-rsc](https://stackexchange.com/filters/207096/node-rsc) on StackExchange. These are monitored by `node-rsc` contributors.
+ * [Search the issue tracker](https://github.com/lorenwest/node-rsc/issues). Hundreds of issues have already been discussed and resolved there.
 
 Contributors
 ------------
@@ -200,8 +221,8 @@ Contributors
 License
 -------
 
-May be freely distributed under the [MIT license](https://raw.githubusercontent.com/lorenwest/node-config/master/LICENSE).
+May be freely distributed under the [MIT license](https://raw.githubusercontent.com/lorenwest/node-rsc/master/LICENSE).
 
 Copyright (c) 2010-2018 Loren West 
-[and other contributors](https://github.com/lorenwest/node-config/graphs/contributors)
+[and other contributors](https://github.com/lorenwest/node-rsc/graphs/contributors)
 

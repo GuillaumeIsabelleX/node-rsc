@@ -1,5 +1,5 @@
 
-var config = {
+var rsc = {
   arrayMerging: {
     emptyArray : ['not empty anymore'], // override empty array with a value
     oneItem    : ['replaced'], // Replace one item with another.
@@ -7,4 +7,4 @@ var config = {
   },
 };
 
-module.exports = config;
+module.exports = rsc;

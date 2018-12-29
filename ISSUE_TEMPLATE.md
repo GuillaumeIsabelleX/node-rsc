@@ -1,8 +1,8 @@
-**Note: for support questions, please use [StackOverflow](https://stackoverflow.com/questions/tagged/node-config) and tag your question with `node-config`**. *This repository's issues are reserved for feature requests and bug reports.*
+**Note: for support questions, please use [StackOverflow](https://stackoverflow.com/questions/tagged/node-rsc) and tag your question with `node-rsc`**. *This repository's issues are reserved for feature requests and bug reports.*
 
 Before submitting a bug report, please search the issue tracker the wiki first. Many issues have already been discussed.
 
-The wiki is located at: https://github.com/lorenwest/node-config/wiki
+The wiki is located at: https://github.com/lorenwest/node-rsc/wiki
 
 ### I'm submitting a ... 
   - [  ] bug report
@@ -16,7 +16,7 @@ The wiki is located at: https://github.com/lorenwest/node-config/wiki
 
 ### Please tell us about your environment:
 
- -  node-config version: x.x.x
+ -  node-rsc version: x.x.x
  -  node-version: x.x.x
  
 ### Other information

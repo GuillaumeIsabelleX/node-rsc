@@ -1,4 +1,4 @@
-# Example of the baseline configuration in YAML, using .yml extension
+# Example of the baseline rscuration in YAML, using .yml extension
 
 AnotherModule:
   parm2yml: value2yml

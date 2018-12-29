@@ -1,15 +1,15 @@
 
-// Tests for config.util functions
+// Tests for rsc.util functions
 
 // Dependencies
 var vows = require('vows'),
     assert = require('assert'),
     path = require('path'),
-    config = require('../lib/config'),
-    initParam = config.util.initParam,
-    loadFileConfigs = config.util.loadFileConfigs;
+    rsc = require('../lib/rsc'),
+    initParam = rsc.util.initParam,
+    loadFileRscs = rsc.util.loadFileRscs;
 
-vows.describe('Tests for config util functions')
+vows.describe('Tests for rsc util functions')
 .addBatch({
     'Tests for util.initParam': {
         'When no command line or env var is set, default value is returned.': function () {
@@ -27,7 +27,7 @@ vows.describe('Tests for config util functions')
         'After calling initParam, value is reflected in getEnv() even if it did not come from process.env': function () {
           process.argv=['ignore','ignore','--FROMARG=in-the-argv'];
           assert(initParam('FROMARG','mydefault'),'in-the-argv');
-          assert(config.util.getEnv('FROMARG'),'in-the-argv');
+          assert(rsc.util.getEnv('FROMARG'),'in-the-argv');
         },
         'Setting a zero value in the process.env works (process.env inherently casts values to strings)': function () {
           process.env.ENV_ONLY = '0';
@@ -38,15 +38,15 @@ vows.describe('Tests for config util functions')
           assert.strictEqual(initParam('FROMARG','mydefault'),'0');
         },
     },
-    'Tests for util.loadFileConfigs': {
+    'Tests for util.loadFileRscs': {
         'It can load data from a given directory': function () {
-          var result = loadFileConfigs(path.join(__dirname, '5-config'));
+          var result = loadFileRscs(path.join(__dirname, '5-rsc'));
           assert.strictEqual(result.number, 5);
         },
         'It ignores NODE_CONFIG when loading from directory': function () {
           var prev = process.env.NODE_CONFIG;
           process.env.NODE_CONFIG = '{"number":4}'
-          var result = loadFileConfigs(path.join(__dirname, '5-config'));
+          var result = loadFileRscs(path.join(__dirname, '5-rsc'));
           assert.strictEqual(result.number, 5);
           process.env.NODE_CONFIG = prev;
         },

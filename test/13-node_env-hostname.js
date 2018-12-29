@@ -2,7 +2,7 @@ var requireUncached = require('./_utils/requireUncached');
 
 'use strict';
 
-var NODE_CONFIG_DIR = __dirname + '/12-config'
+var NODE_CONFIG_DIR = __dirname + '/12-rsc'
 
 // Dependencies
 var vows = require('vows'),
@@ -16,7 +16,7 @@ vows.describe('Tests for HOSTNAME and HOST environment variables')
         delete process.env.HOST;
         delete process.env.HOSTNAME;
 
-        return requireUncached(__dirname + '/../lib/config');
+        return requireUncached(__dirname + '/../lib/rsc');
       },
       'OS.hostname() is the winner': function(CONFIG) {
         assert.equal(typeof CONFIG.util.getEnv('HOSTNAME'), 'string');
@@ -30,7 +30,7 @@ vows.describe('Tests for HOSTNAME and HOST environment variables')
       delete process.env.HOST;
       process.env.HOSTNAME = 'some.machine';
 
-      return requireUncached(__dirname + '/../lib/config');
+      return requireUncached(__dirname + '/../lib/rsc');
     },
     'HOSTNAME env variable is the winner': function(CONFIG) {
       assert.equal(CONFIG.util.getEnv('HOSTNAME'), 'some.machine');
@@ -44,7 +44,7 @@ vows.describe('Tests for HOSTNAME and HOST environment variables')
       delete process.env.HOSTNAME;
       process.env.HOST = 'other.machine';
 
-      return requireUncached(__dirname + '/../lib/config');
+      return requireUncached(__dirname + '/../lib/rsc');
     },
     'HOST env variable is the winner': function(CONFIG) {
       assert.equal(CONFIG.util.getEnv('HOSTNAME'), 'other.machine');

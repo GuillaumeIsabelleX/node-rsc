@@ -1,13 +1,13 @@
 var requireUncached = require('./_utils/requireUncached');
 
 // Test declaring deferred values.
-// The key config files involved here are:
-//      test/config/default-array-merge.js
-//      test/config/local-array-merge.js
+// The key rsc files involved here are:
+//      test/rsc/default-array-merge.js
+//      test/rsc/local-array-merge.js
 
 
-// Change the configuration directory for testing
-process.env.NODE_CONFIG_DIR = __dirname + '/config';
+// Change the rscuration directory for testing
+process.env.NODE_CONFIG_DIR = __dirname + '/rsc';
 
 // Hardcode $NODE_ENV=test for testing
 process.env.NODE_ENV='test';
@@ -15,9 +15,9 @@ process.env.NODE_ENV='test';
 // Test for multi-instance applications
 process.env.NODE_APP_INSTANCE='array-merge';
 
-// Because require'ing config creates and caches a global singleton,
+// Because require'ing rsc creates and caches a global singleton,
 // We have to invalidate the cache to build new object based on the environment variables above
-var CONFIG = requireUncached(__dirname + '/../lib/config');
+var CONFIG = requireUncached(__dirname + '/../lib/rsc');
 
 // Dependencies
 var vows = require('vows'),

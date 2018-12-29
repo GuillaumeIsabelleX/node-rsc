@@ -7,7 +7,7 @@ var request = require('request'),
     fs = require('fs');
 
 // Constants
-REPO = 'lorenwest/node-config';
+REPO = 'lorenwest/node-rsc';
 README_FILE = './README.md';
 
 // HTML template parts

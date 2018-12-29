@@ -12,8 +12,8 @@ vows.describe('Test git-crypt integration')
   'initialization with CONFIG_SKIP_GITCRYPT': {
     topic : function () {
 
-      // Change the configuration directory for testing
-      process.env.NODE_CONFIG_DIR = __dirname + '/10-config';
+      // Change the rscuration directory for testing
+      process.env.NODE_CONFIG_DIR = __dirname + '/10-rsc';
 
       // Test for multi-instance applications
       delete process.env.NODE_APP_INSTANCE;
@@ -28,15 +28,15 @@ vows.describe('Test git-crypt integration')
       delete process.env["NODE_CONFIG"]
       delete process.env["CUSTOM_JSON_ENVIRONMENT_VAR"];
 
-      CONFIG = requireUncached(__dirname + '/../lib/config');
+      CONFIG = requireUncached(__dirname + '/../lib/rsc');
 
       return CONFIG;
 
     },
-    'Config library is available': function() {
+    'Rsc library is available': function() {
       assert.isObject(CONFIG);
     },
-    'Loading configurations from a JSON file is correct': function() {
+    'Loading rscurations from a JSON file is correct': function() {
       assert.equal(CONFIG.Customers.dbPassword, 'password will be overwritten.');
     }
   },
@@ -53,9 +53,9 @@ vows.describe('Test git-crypt integration')
 
       assert.throws(
         function () { 
-          CONFIG = requireUncached(__dirname + '/../lib/config');
+          CONFIG = requireUncached(__dirname + '/../lib/rsc');
         },
-        /Cannot parse config file/
+        /Cannot parse rsc file/
       );
     }
   }

@@ -1,11 +1,11 @@
 
-var config = {
+var rsc = {
   siteName : 'default site name',
   number : 5,
 };
 
-config.email = {
+rsc.email = {
     subject : 'default subject',
 }
 
-module.exports = config;
+module.exports = rsc;

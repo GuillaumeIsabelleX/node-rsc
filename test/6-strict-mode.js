@@ -9,8 +9,8 @@ vows.describe('Tests for strict mode').addBatch({
   "Specifying an unused NODE_ENV value and valid NODE_APP_INSTANCE value throws an exception": _expectException({
     NODE_ENV         : 'BOOM',
     APP_INSTANCE     : 'valid-instance',
-    exceptionMessage : "FATAL: NODE_ENV value of 'BOOM' did not match any deployment config file names. "
-                     + "See https://github.com/lorenwest/node-config/wiki/Strict-Mode",
+    exceptionMessage : "FATAL: NODE_ENV value of 'BOOM' did not match any deployment rsc file names. "
+                     + "See https://github.com/lorenwest/node-rsc/wiki/Strict-Mode",
   }),
 
   // Because NODE_ENV=development = default
@@ -23,36 +23,36 @@ vows.describe('Tests for strict mode').addBatch({
   "Specifying NODE_ENV=production,cloud with no cloud file throws an exception. ": _expectException({
     NODE_ENV         : 'production,cloud',
     APP_INSTANCE     : 'valid-instance',
-    exceptionMessage : "FATAL: NODE_ENV value of 'cloud' did not match any deployment config file names. "
-                     + "See https://github.com/lorenwest/node-config/wiki/Strict-Mode"
+    exceptionMessage : "FATAL: NODE_ENV value of 'cloud' did not match any deployment rsc file names. "
+                     + "See https://github.com/lorenwest/node-rsc/wiki/Strict-Mode"
   }),
 
   "Specifying an unused NODE_APP_INSTANCE and valid NODE_ENV value throws an exception": _expectException({
     NODE_ENV         : 'valid-deployment',
     APP_INSTANCE     : 'BOOM',
-    exceptionMessage : "FATAL: NODE_APP_INSTANCE value of 'BOOM' did not match any instance config file names. "
-                     + "See https://github.com/lorenwest/node-config/wiki/Strict-Mode",
+    exceptionMessage : "FATAL: NODE_APP_INSTANCE value of 'BOOM' did not match any instance rsc file names. "
+                     + "See https://github.com/lorenwest/node-rsc/wiki/Strict-Mode",
   }),
 
   "NODE_ENV=default throws exception: reserved word": _expectException({
     NODE_ENV         : 'default',
     APP_INSTANCE     : 'valid-instance',
     exceptionMessage :"FATAL: NODE_ENV value of 'default' is ambiguous. "
-                     +"See https://github.com/lorenwest/node-config/wiki/Strict-Mode",
+                     +"See https://github.com/lorenwest/node-rsc/wiki/Strict-Mode",
   }),
 
   "NODE_ENV=production,default throws exception: reserved word": _expectException({
     NODE_ENV         : 'production,default',
     APP_INSTANCE     : 'valid-instance',
     exceptionMessage :"FATAL: NODE_ENV value of 'default' is ambiguous. "
-                     +"See https://github.com/lorenwest/node-config/wiki/Strict-Mode",
+                     +"See https://github.com/lorenwest/node-rsc/wiki/Strict-Mode",
   }),
 
   "NODE_ENV=local throws exception: reserved word": _expectException({
     NODE_ENV         : 'local',
     APP_INSTANCE     : 'valid-instance',
     exceptionMessage :"FATAL: NODE_ENV value of 'local' is ambiguous. "
-                     +"See https://github.com/lorenwest/node-config/wiki/Strict-Mode",
+                     +"See https://github.com/lorenwest/node-rsc/wiki/Strict-Mode",
   }),
 })
 .export(module);
@@ -63,14 +63,14 @@ vows.describe('Tests for strict mode').addBatch({
 function _expectException (opts) {
   return {
     topic: function () {
-      // Change the configuration directory for testing
-      process.env.NODE_CONFIG_DIR         = __dirname + '/6-config';
+      // Change the rscuration directory for testing
+      process.env.NODE_CONFIG_DIR         = __dirname + '/6-rsc';
       process.env.NODE_CONFIG_STRICT_MODE = 1;
       process.env.NODE_APP_INSTANCE       = opts.APP_INSTANCE;
       process.env.NODE_ENV                = opts.NODE_ENV;
       delete process.env.NODE_CONFIG;
       try { 
-        var config = requireUncached(__dirname + '/../lib/config');
+        var rsc = requireUncached(__dirname + '/../lib/rsc');
       }
       catch (e) {
         return e;

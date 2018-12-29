@@ -1,4 +1,4 @@
-export interface Config {
+export interface Rsc {
   siteTitle?: string;
   latitude?: number;
   longitude?: number;

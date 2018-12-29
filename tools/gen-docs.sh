@@ -23,12 +23,12 @@ template=./doc/template
 version=`grep version package.json | sed 's/.*: "\(.*\)".*/\1/'`
 
 # The version of YUI the project is using.  This effects the output for
-# YUI configuration attributes.  This should start with '2' or '3'.
+# YUI rscuration attributes.  This should start with '2' or '3'.
 yuiversion=3
 
 # The project and URL
-project="Node.js Configuration"
-project_url="https://github.com/lorenwest/node-config"
+project="Node.js Rscuration"
+project_url="https://github.com/lorenwest/node-rsc"
 
 ##############################################################################
 # add -s to the end of the line to show items marked private
@@ -46,9 +46,9 @@ $yuidoc_home/bin/yuidoc.py \
 
 rm -rf $parser_tmp
 
-echo Copying the documentation to ../lorenwest.github.com/node-config/$version
-rm -rf ../lorenwest.github.com/node-config/$version
-cp -R doc ../lorenwest.github.com/node-config/$version
-echo Copying the documentation to ../lorenwest.github.com/node-config/latest
-rm -rf ../lorenwest.github.com/node-config/latest
-cp -R doc ../lorenwest.github.com/node-config/latest
+echo Copying the documentation to ../lorenwest.github.com/node-rsc/$version
+rm -rf ../lorenwest.github.com/node-rsc/$version
+cp -R doc ../lorenwest.github.com/node-rsc/$version
+echo Copying the documentation to ../lorenwest.github.com/node-rsc/latest
+rm -rf ../lorenwest.github.com/node-rsc/latest
+cp -R doc ../lorenwest.github.com/node-rsc/latest

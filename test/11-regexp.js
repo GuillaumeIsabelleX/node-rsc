@@ -1,12 +1,12 @@
 'use strict';
 
-process.env.NODE_CONFIG_DIR = __dirname + '/config';
+process.env.NODE_CONFIG_DIR = __dirname + '/rsc';
 process.env.NODE_ENV = 'test';
 process.env.NODE_APP_INSTANCE = 'regexp';
 
 var requireUncached = require('./_utils/requireUncached');
 
-var CONFIG = requireUncached(__dirname + '/../lib/config');
+var CONFIG = requireUncached(__dirname + '/../lib/rsc');
 
 var assert = require('assert');
 var vows = require('vows');

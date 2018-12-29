@@ -13,10 +13,10 @@ var assert = require('assert');
 var argvOrg = process.argv;
 
 /**
- * <p>Tests for underlying node-config utilities.  To run type:</p>
+ * <p>Tests for underlying node-rsc utilities.  To run type:</p>
  * <pre>npm test</pre>
- * <p>Or, in a project that uses node-config:</p>
- * <pre>npm test config</pre>
+ * <p>Or, in a project that uses node-rsc:</p>
+ * <pre>npm test rsc</pre>
  *
  * @class ProtectedTest
  */
@@ -29,8 +29,8 @@ vows.describe('Protected (hackable) utilities test')
   // We initialize in our own /batch/ because batches are run in serial, while individual contexts run in parallel.
   'Library initialization': {
     topic : function () {
-      // Change the configuration directory for testing
-      process.env.NODE_CONFIG_DIR = __dirname + '/config';
+      // Change the rscuration directory for testing
+      process.env.NODE_CONFIG_DIR = __dirname + '/rsc';
 
       // Hardcode $NODE_ENV=test for testing
       process.env.NODE_ENV='test';
@@ -47,13 +47,13 @@ vows.describe('Protected (hackable) utilities test')
       process.env['CUSTOM_JSON_ENVIRONMENT_VAR'] = override;
 
       // Dependencies
-      CONFIG = requireUncached(__dirname + '/../lib/config');
+      CONFIG = requireUncached(__dirname + '/../lib/rsc');
 
       return CONFIG;
 
     },
-    'Library is available': function(config) {
-      assert.isObject(config);
+    'Library is available': function(rsc) {
+      assert.isObject(rsc);
     }
   }
 })
@@ -489,84 +489,84 @@ vows.describe('Protected (hackable) utilities test')
 
   'parseFile() tests': {
     topic: function() {
-      return CONFIG.util.parseFile(__dirname + '/config/default.yaml');
+      return CONFIG.util.parseFile(__dirname + '/rsc/default.yaml');
     },
     'The function exists': function() {
       assert.isFunction(CONFIG.util.parseFile);
     },
-    'An object is returned': function(config) {
-      assert.isObject(config);
+    'An object is returned': function(rsc) {
+      assert.isObject(rsc);
     },
-    'The correct object is returned': function(config) {
-      assert.isObject(config.Customers);
-      assert.isTrue(config.Customers.dbName == 'from_default_yaml');
-      assert.isTrue(config.Customers.dbPort == 5984);
-      assert.isObject(config.AnotherModule);
-      assert.isTrue(config.AnotherModule.parm2 == "value2");
+    'The correct object is returned': function(rsc) {
+      assert.isObject(rsc.Customers);
+      assert.isTrue(rsc.Customers.dbName == 'from_default_yaml');
+      assert.isTrue(rsc.Customers.dbPort == 5984);
+      assert.isObject(rsc.AnotherModule);
+      assert.isTrue(rsc.AnotherModule.parm2 == "value2");
     }
   },
 
   'CSON parse tests': {
     topic: function() {
-      return CONFIG.util.parseFile(__dirname + '/config/default.cson');
+      return CONFIG.util.parseFile(__dirname + '/rsc/default.cson');
     },
     'The function exists': function() {
       assert.isFunction(CONFIG.util.parseFile);
     },
-    'An object is returned': function(config) {
-      assert.isObject(config);
+    'An object is returned': function(rsc) {
+      assert.isObject(rsc);
     },
-    'The correct object is returned': function(config) {
-      assert.isObject(config.Customers);
-      assert.isTrue(config.Customers.dbName == 'from_default_cson');
-      assert.isTrue(config.Customers.dbPassword == 'password will be overwritten.');
-      assert.isObject(config.AnotherModule);
-      assert.isTrue(config.AnotherModule.parm4 == "value4");
-      assert.isArray(config.Customers.lang);
+    'The correct object is returned': function(rsc) {
+      assert.isObject(rsc.Customers);
+      assert.isTrue(rsc.Customers.dbName == 'from_default_cson');
+      assert.isTrue(rsc.Customers.dbPassword == 'password will be overwritten.');
+      assert.isObject(rsc.AnotherModule);
+      assert.isTrue(rsc.AnotherModule.parm4 == "value4");
+      assert.isArray(rsc.Customers.lang);
     }
   },
 
   '.properties parse tests': {
     topic: function() {
-      return CONFIG.util.parseFile(__dirname + '/config/default.properties');
+      return CONFIG.util.parseFile(__dirname + '/rsc/default.properties');
     },
     'The function exists': function() {
       assert.isFunction(CONFIG.util.parseFile);
     },
-    'An object is returned': function(config) {
-      assert.isObject(config);
+    'An object is returned': function(rsc) {
+      assert.isObject(rsc);
     },
-    'The correct object is returned': function(config) {
-      assert.isObject(config.AnotherModule);
-      assert.isTrue(config.AnotherModule.parm5 == "value5");
-      assert.isObject(config['key with spaces']);
-      assert.isTrue(config['key with spaces'].another_key == 'hello');
-      assert.isUndefined(config.ignore_this_please);
-      assert.isUndefined(config.i_am_a_comment);
+    'The correct object is returned': function(rsc) {
+      assert.isObject(rsc.AnotherModule);
+      assert.isTrue(rsc.AnotherModule.parm5 == "value5");
+      assert.isObject(rsc['key with spaces']);
+      assert.isTrue(rsc['key with spaces'].another_key == 'hello');
+      assert.isUndefined(rsc.ignore_this_please);
+      assert.isUndefined(rsc.i_am_a_comment);
     },
-    'Variable replacements are working': function(config) {
-      assert.isTrue(config.replacement.param == "foobar")
+    'Variable replacements are working': function(rsc) {
+      assert.isTrue(rsc.replacement.param == "foobar")
     },
-    'Sections are supported': function(config) {
-      assert.isDefined(config.section.param);
-      assert.isUndefined(config.param);
+    'Sections are supported': function(rsc) {
+      assert.isDefined(rsc.section.param);
+      assert.isUndefined(rsc.param);
     }
   },
 
-  'loadFileConfigs() tests': {
+  'loadFileRscs() tests': {
     topic: function() {
-      return CONFIG.util.loadFileConfigs();
+      return CONFIG.util.loadFileRscs();
     },
     'The function exists': function() {
-      assert.isFunction(CONFIG.util.loadFileConfigs);
+      assert.isFunction(CONFIG.util.loadFileRscs);
     },
-    'An object is returned': function(configs) {
-      assert.isObject(configs);
+    'An object is returned': function(rscs) {
+      assert.isObject(rscs);
     },
-    'The correct object is returned': function(config) {
-      assert.isObject(config.Customers);
-      assert.isTrue(config.Customers.dbHost == 'base');
-      assert.isTrue(config.Customers.dbName == 'override_from_runtime_json');
+    'The correct object is returned': function(rsc) {
+      assert.isObject(rsc.Customers);
+      assert.isTrue(rsc.Customers.dbHost == 'base');
+      assert.isTrue(rsc.Customers.dbName == 'override_from_runtime_json');
     }
   },
 
@@ -587,23 +587,23 @@ vows.describe('Protected (hackable) utilities test')
     'The function exists': function() {
       assert.isFunction(CONFIG.util.attachProtoDeep);
     },
-    'The original object is returned': function(config) {
-      assert.isObject(config);
-      assert.isTrue(config.subObject.item1 === 23);
-      assert.isTrue(config.subObject.subSubObject.item2 === "hello");
+    'The original object is returned': function(rsc) {
+      assert.isObject(rsc);
+      assert.isTrue(rsc.subObject.item1 === 23);
+      assert.isTrue(rsc.subObject.subSubObject.item2 === "hello");
     },
-    'The cloneDeep method is attached to the object': function(config) {
-      assert.isTrue({a:27}.a == config.util.cloneDeep({a:27}).a);
+    'The cloneDeep method is attached to the object': function(rsc) {
+      assert.isTrue({a:27}.a == rsc.util.cloneDeep({a:27}).a);
     },
-    'The cloneDeep method is also attached to sub-objects': function(config) {
-      assert.isTrue({a:27}.a == config.subObject.util.cloneDeep({a:27}).a);
-      assert.isTrue({a:27}.a == config.subObject.subSubObject.util.cloneDeep({a:27}).a);
+    'The cloneDeep method is also attached to sub-objects': function(rsc) {
+      assert.isTrue({a:27}.a == rsc.subObject.util.cloneDeep({a:27}).a);
+      assert.isTrue({a:27}.a == rsc.subObject.subSubObject.util.cloneDeep({a:27}).a);
     },
-    'Prototype methods are not exposed in the object': function(config) {
+    'Prototype methods are not exposed in the object': function(rsc) {
       // This test is here because altering object.__proto__ places the method
       // directly onto the object. That caused problems when iterating over the
       // object.  This implementation does the same thing, but hides them.
-      assert.isTrue(JSON.stringify(config) == '{"subObject":{"item1":23,"subSubObject":{"item2":"hello"}}}');
+      assert.isTrue(JSON.stringify(rsc) == '{"subObject":{"item1":23,"subSubObject":{"item2":"hello"}}}');
     }
   },
 
@@ -628,8 +628,8 @@ vows.describe('Protected (hackable) utilities test')
         assert.isFalse(CONFIG.util.getCmdLineArg('NODE_CONFIG_DIR'));
     },
     'Returns the argument (alternative syntax)': function() {
-        process.argv.push('--NODE_CONFIG_DIR=/etc/nodeConfig');
-        assert.equal(CONFIG.util.getCmdLineArg('NODE_CONFIG_DIR'), '/etc/nodeConfig');
+        process.argv.push('--NODE_CONFIG_DIR=/etc/nodeRsc');
+        assert.equal(CONFIG.util.getCmdLineArg('NODE_CONFIG_DIR'), '/etc/nodeRsc');
     },
     'Returns always the first matching': function() {
         process.argv.push('--NODE_ENV=test');
@@ -644,7 +644,7 @@ vows.describe('Protected (hackable) utilities test')
 
   'toObject() tests': {
     topic: function() {
-      return CONFIG.util.loadFileConfigs();
+      return CONFIG.util.loadFileRscs();
     },
     'The function exists': function() {
       assert.isFunction(CONFIG.util.toObject);

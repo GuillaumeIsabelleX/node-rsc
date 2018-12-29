@@ -5,19 +5,19 @@ var vows   = require('vows'),
     assert = require('assert'),
     Path   = require('path');
 
-vows.describe('Tests config.util.getConfigSources').addBatch({
+vows.describe('Tests rsc.util.getRscSources').addBatch({
   'tests with NODE_CONFIG env set, and --NODE_CONFIG command line flag': {
     topic: function () {
-     // Change the configuration directory for testing
-     process.env.NODE_CONFIG_DIR = __dirname + '/5-config';
+     // Change the rscuration directory for testing
+     process.env.NODE_CONFIG_DIR = __dirname + '/5-rsc';
 
       delete process.env.NODE_ENV;
       process.env.NODE_CONFIG = '{}';
       delete process.env.NODE_APP_INSTANCE;
       process.env.NODE_CONFIG_STRICT_MODE=0;
       process.argv = ["node","path/to/some.js","--NODE_CONFIG='{}'"];
-      var config = requireUncached(__dirname + '/../lib/config');
-      return config.util.getConfigSources();
+      var rsc = requireUncached(__dirname + '/../lib/rsc');
+      return rsc.util.getRscSources();
     },
 
     'Two files plus NODE_CONFIG in env and as command line args should result in four entries': function(topic) {
@@ -33,16 +33,16 @@ vows.describe('Tests config.util.getConfigSources').addBatch({
 
   'tests without NODE_ENV set': {
     topic: function () {
-      // Change the configuration directory for testing
-      process.env.NODE_CONFIG_DIR = __dirname + '/5-config';
+      // Change the rscuration directory for testing
+      process.env.NODE_CONFIG_DIR = __dirname + '/5-rsc';
 
       delete process.env.NODE_ENV;
       delete process.env.NODE_CONFIG;
       delete process.env.NODE_APP_INSTANCE;
       process.env.NODE_CONFIG_STRICT_MODE=0;
       process.argv = [];
-      var config = requireUncached(__dirname + '/../lib/config');
-      return config.util.getConfigSources();
+      var rsc = requireUncached(__dirname + '/../lib/rsc');
+      return rsc.util.getRscSources();
     },
 
     'Two files should result in two entries': function(topic) {
@@ -58,15 +58,15 @@ vows.describe('Tests config.util.getConfigSources').addBatch({
 
   'tests with NODE_ENV set': {
     topic: function () {
-      // Change the configuration directory for testing
-      process.env.NODE_CONFIG_DIR = __dirname + '/5-config';
+      // Change the rscuration directory for testing
+      process.env.NODE_CONFIG_DIR = __dirname + '/5-rsc';
 
       process.env.NODE_ENV='test';
       delete process.env.NODE_CONFIG;
       delete process.env.NODE_APP_INSTANCE;
       process.argv = [];
-      var config = requireUncached(__dirname + '/../lib/config');
-      return config.util.getConfigSources();
+      var rsc = requireUncached(__dirname + '/../lib/rsc');
+      return rsc.util.getRscSources();
     },
 
     'Two files should result in two entries': function(topic) {
@@ -79,17 +79,17 @@ vows.describe('Tests config.util.getConfigSources').addBatch({
  },
 
 
- 'Files which return empty objects still end up in getConfigSources()': {
+ 'Files which return empty objects still end up in getRscSources()': {
     topic: function () {
-      // Change the configuration directory for testing
-      process.env.NODE_CONFIG_DIR = __dirname + '/5-config';
+      // Change the rscuration directory for testing
+      process.env.NODE_CONFIG_DIR = __dirname + '/5-rsc';
 
       process.env.NODE_ENV='empty';
       delete process.env.NODE_CONFIG;
       delete process.env.NODE_APP_INSTANCE;
       process.argv = [];
-      var config = requireUncached(__dirname + '/../lib/config');
-      return config.util.getConfigSources();
+      var rsc = requireUncached(__dirname + '/../lib/rsc');
+      return rsc.util.getRscSources();
     },
 
     'Three files should result in 3 entries': function(topic) {

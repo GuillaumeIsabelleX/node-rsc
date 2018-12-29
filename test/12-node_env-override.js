@@ -2,7 +2,7 @@ var requireUncached = require('./_utils/requireUncached');
 
 'use strict';
 
-var NODE_CONFIG_DIR = __dirname + '/12-config'
+var NODE_CONFIG_DIR = __dirname + '/12-rsc'
 
 // Dependencies
 var vows = require('vows'),
@@ -20,10 +20,10 @@ vows.describe('Tests for NODE_*_ENV load order')
 
         process.env.NODE_CONFIG_DIR = NODE_CONFIG_DIR;
 
-        return requireUncached(__dirname + '/../lib/config');
+        return requireUncached(__dirname + '/../lib/rsc');
       },
-      'Library is available': function(config) {
-        assert.isObject(config);
+      'Library is available': function(rsc) {
+        assert.isObject(rsc);
       }
     }
 })
@@ -33,7 +33,7 @@ vows.describe('Tests for NODE_*_ENV load order')
       delete process.env.NODE_ENV;
       delete process.env.NODE_CONFIG_ENV;
 
-      return requireUncached(__dirname + '/../lib/config');
+      return requireUncached(__dirname + '/../lib/rsc');
     },
     'default \'development\' deployment should be used': function(CONFIG) {
       assert.equal(CONFIG.util.getEnv('NODE_ENV'), 'development');
@@ -46,11 +46,11 @@ vows.describe('Tests for NODE_*_ENV load order')
     topic: function() {
       process.env.NODE_ENV = 'apollo';
 
-      return requireUncached(__dirname + '/../lib/config');
+      return requireUncached(__dirname + '/../lib/rsc');
     },
     'NODE_CONFIG_ENV by itself should be used': function(CONFIG) {
       assert.equal(CONFIG.util.getEnv('NODE_CONFIG_ENV'), 'apollo');
-      assert.equal(CONFIG.get('deploymentUsed'), 'node-config-env-provided');
+      assert.equal(CONFIG.get('deploymentUsed'), 'node-rsc-env-provided');
     },
     'Revert process runtime changes': function() {
       delete process.env.NODE_ENV;
@@ -62,7 +62,7 @@ vows.describe('Tests for NODE_*_ENV load order')
     topic: function() {
       process.env.NODE_CONFIG_ENV = 'mercury';
 
-      return requireUncached(__dirname + '/../lib/config');
+      return requireUncached(__dirname + '/../lib/rsc');
     },
     'NODE_ENV by itself should be used': function(CONFIG) {
       assert.equal(CONFIG.util.getEnv('NODE_CONFIG_ENV'), 'mercury');
@@ -79,10 +79,10 @@ vows.describe('Tests for NODE_*_ENV load order')
       process.env.NODE_CONFIG_ENV = 'apollo';
       process.env.NODE_ENV = 'mercury';
 
-      return requireUncached(__dirname + '/../lib/config');
+      return requireUncached(__dirname + '/../lib/rsc');
     },
     'NODE_CONFIG_ENV value should be used': function(CONFIG) {
-      assert.equal(CONFIG.get('deploymentUsed'), 'node-config-env-provided');
+      assert.equal(CONFIG.get('deploymentUsed'), 'node-rsc-env-provided');
     },
     'Revert process runtime changes': function() {
       delete process.env.NODE_CONFIG_ENV;

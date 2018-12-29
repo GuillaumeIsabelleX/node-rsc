@@ -1,4 +1,4 @@
-// Common configuration parameters
+// Common rscuration parameters
 module.exports = {
   TestModule: {
     parm1:"value1",

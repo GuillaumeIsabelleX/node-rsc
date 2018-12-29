@@ -1,15 +1,15 @@
-import { Config } from './types';
-import { deferConfig as defer } from '../../defer';
+import { Rsc } from './types';
+import { deferRsc as defer } from '../../defer';
 
-const localConfig: Config = {
+const localRsc: Rsc = {
  siteTitle : 'New Instance!',
 };
 
-localConfig['map'] = {
+localRsc['map'] = {
   centerPoint :  { lat: 3, lon: 4 },
 };
 
-localConfig['original'] = {
+localRsc['original'] = {
   // An original value passed to deferred function
   original: defer((cfg, original) => original),
 
@@ -17,4 +17,4 @@ localConfig['original'] = {
   deferredOriginal: defer((cfg, original) => original),
 };
 
-export default localConfig;
+export default localRsc;

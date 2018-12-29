@@ -1,14 +1,14 @@
-var defer = require('../../defer').deferConfig;
+var defer = require('../../defer').deferRsc;
 
-var config = {
+var rsc = {
  siteTitle : 'New Instance!',
 };
 
-config.map = {
+rsc.map = {
   centerPoint :  { lat: 3, lon: 4 },
 };
 
-config.original = {
+rsc.original = {
   // An original value passed to deferred function
   original: defer(function(cfg, original) {
     return original;
@@ -20,4 +20,4 @@ config.original = {
   }),
 };
 
-module.exports = config;
+module.exports = rsc;

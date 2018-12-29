@@ -1,7 +1,7 @@
 
-var defer = require('../../defer').deferConfig;
+var defer = require('../../defer').deferRsc;
 
-var config = {
+var rsc = {
   siteTitle : 'Site title',
   latitude  : 1,
   longitude : 2,
@@ -9,9 +9,9 @@ var config = {
 };
 
 // Set up a default value which refers to another value.
-// The resolution of the value is deferred until all the config files have been loaded
-// So that if 'config.siteTitle' is overridden, this will point to the correct value.
-config.welcomeEmail = {
+// The resolution of the value is deferred until all the rsc files have been loaded
+// So that if 'rsc.siteTitle' is overridden, this will point to the correct value.
+rsc.welcomeEmail = {
   subject :  defer(function (cfg) {
     return "Welcome to "+cfg.siteTitle;
   }),
@@ -20,19 +20,19 @@ config.welcomeEmail = {
     return "Still just a function.";
   },
 
-  // Look ma, no arg passing. The main config object is bound to 'this'
+  // Look ma, no arg passing. The main rsc object is bound to 'this'
   justThis: defer(function () {
     return "Welcome to this "+this.siteTitle;
   }),
 };
 
-config.map = {
+rsc.map = {
   centerPoint : defer(function () {
     return { lat: this.latitude, lon: this.longitude };
   }),
 };
 
-config.original = {
+rsc.original = {
   // An original value passed to deferred function
   original: "an original value",
 
@@ -42,4 +42,4 @@ config.original = {
   }),
 };
 
-module.exports = config;
+module.exports = rsc;

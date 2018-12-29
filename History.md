@@ -6,7 +6,7 @@
 3.0.0 / 2018-11-20
 ==================
 
-   * Ensure config array items and objects are sealed @fgheorghe
+   * Ensure rsc array items and objects are sealed @fgheorghe
      - This required a major version bump in case someone
      - relied on the ability to mutate non-sealed data.
 
@@ -28,7 +28,7 @@
 Potential for backward incompatibility requiring a major version bump.
 
 Safe to upgrade to major version 2 if you're using a recent NodeJS version
-and you're not trying to mutate config arrays.
+and you're not trying to mutate rsc arrays.
 
   * Added array immutability - jacobemerick
   * Removed Node V.4 support
@@ -41,7 +41,7 @@ and you're not trying to mutate config arrays.
 1.30.0 / 2018-02-26
 ===================
 
-  * Support for nested raw() in javascript configurations - patrickpilch
+  * Support for nested raw() in javascript rscurations - patrickpilch
 
 1.29.4 / 2018-02-03
 ===================
@@ -67,7 +67,7 @@ and you're not trying to mutate config arrays.
 1.29.0 / 2017-12-26
 ===================
 
-  * Update docs for JavaScript-formatted config files and link them from the README - markstos
+  * Update docs for JavaScript-formatted rsc files and link them from the README - markstos
   * Fixed 'hostname' value selection when there is no environment variable for that - wmangelardo
 
 
@@ -103,7 +103,7 @@ and you're not trying to mutate config arrays.
 
   * Added tests for extendDeep @IvanVergiliev
   * Added TypeScript support @cypherq
-  * Update config.js with correctly cased type def @ScionOfBytes
+  * Update rsc.js with correctly cased type def @ScionOfBytes
 
 1.25.1 / 2017-02-01
 ===================
@@ -113,7 +113,7 @@ and you're not trying to mutate config arrays.
 1.25.0 / 2017-01-31
 ===================
 
-  * Add support for configuration files stored with git-crypt @cunneen
+  * Add support for rscuration files stored with git-crypt @cunneen
 
 1.24.0 / 2016-11-02
 ===================
@@ -128,14 +128,14 @@ and you're not trying to mutate config arrays.
 1.22.0 / 2016-10-25
 ===================
 
-  * original/previous value for deferredConfig @simon-scherzinger
-  * util.loadFileConfigs: support optional source dir @wmertens
-  * Adding raw wrapper to prevent object modification in config @patrickpilch
+  * original/previous value for deferredRsc @simon-scherzinger
+  * util.loadFileRscs: support optional source dir @wmertens
+  * Adding raw wrapper to prevent object modification in rsc @patrickpilch
 
 1.21.0 / 2016-06-01
 ===================
 
-  * Added XML configuration @tusharmath
+  * Added XML rscuration @tusharmath
 
 1.20.4 / 2016-05-23
 ===================
@@ -190,7 +190,7 @@ and you're not trying to mutate config arrays.
 1.17.0 / 2015-11-17
 ===================
 
-  * Update warning about missing configuration files to mention how to disable the warning #245 @markstos 
+  * Update warning about missing rscuration files to mention how to disable the warning #245 @markstos 
   * Upgrade to run CI with travis containers @lorenwest
   * Fixed bug with comments and inline json @elliotttf
 
@@ -239,33 +239,33 @@ and you're not trying to mutate config arrays.
 1.9.0 / 2014-12-08
 ==================
 
-  * New strictness checks have been added to ensure the expected configuration has been loaded. Warnings are now thrown in these cases. If NODE_CONFIG_STRICT_MODE is set, exceptions are thrown instead. (@markstos)
-    * There must be an explicit config file matching `NODE_ENV` if `NODE_ENV` is set.
-    * There must be an explicit config file matching `NODE_APP_INSTANCE` if `NODE_APP_INSTANCE` is set
+  * New strictness checks have been added to ensure the expected rscuration has been loaded. Warnings are now thrown in these cases. If NODE_CONFIG_STRICT_MODE is set, exceptions are thrown instead. (@markstos)
+    * There must be an explicit rsc file matching `NODE_ENV` if `NODE_ENV` is set.
+    * There must be an explicit rsc file matching `NODE_APP_INSTANCE` if `NODE_APP_INSTANCE` is set
     * `NODE_ENV` must not match 'default' or 'local' to avoid ambiguity.
 
   * Added .iced extension support (@arthanzel)
 
-  * Highlight `config.has()` in the README. Use it to check to if a value exists, since `config.get()`
+  * Highlight `rsc.has()` in the README. Use it to check to if a value exists, since `rsc.get()`
     throws exceptions on undefined values. (@markstos)
 
-  * API Change: getConfigSources() now starts to return data on config files that are valid-but-empty. (@markstos)
+  * API Change: getRscSources() now starts to return data on rsc files that are valid-but-empty. (@markstos)
 
 1.8.1 / 2014-11-14
 ==================
 
   * Simplify syntax for defer() functions. The 'this' value in the functions is now bound
-    to the main configuration object, so it doesn't have to be passed into the function. (@markstos)
-  * new defer sub-module introduced in 1.8.0 can now be accessed by require('config/defer')
-    For usage, see: https://github.com/lorenwest/node-config/wiki/Configuration-Files#javascript-module---js
+    to the main rscuration object, so it doesn't have to be passed into the function. (@markstos)
+  * new defer sub-module introduced in 1.8.0 can now be accessed by require('rsc/defer')
+    For usage, see: https://github.com/lorenwest/node-rsc/wiki/Rscuration-Files#javascript-module---js
   * Add test coverage for array merging cases. (@markstos)
   * Bump dependency on cson package to 1.6.1 (@markstos)
 
 1.8.0 / 2014-11-13
 ==================
 
-  * Added deferred function for evaluating configs after load (@markstos)
-    For details, see: https://github.com/lorenwest/node-config/wiki/Configuration-Files#javascript-module---js
+  * Added deferred function for evaluating rscs after load (@markstos)
+    For details, see: https://github.com/lorenwest/node-rsc/wiki/Rscuration-Files#javascript-module---js
   * Bumped js-yaml dependency (@markstos)
 
 1.7.0 / 2014-10-30
@@ -276,22 +276,22 @@ and you're not trying to mutate config arrays.
 1.6.0 / 2014-10-22
 ==================
 
-  * Added support for property accessors in configs (@jaylynch)
+  * Added support for property accessors in rscs (@jaylynch)
 
 1.5.0 / 2014-10-20
 ==================
 
-  * Added support for .json5 config files (@bertrandom) 
+  * Added support for .json5 rsc files (@bertrandom) 
 
 1.4.0 / 2014-10-16
 ==================
 
-  * Added support for .properties config files (@superoven)
+  * Added support for .properties rsc files (@superoven)
 
 1.3.0 / 2014-10-15
 ==================
 
-  * Added support for CSON configuration files (@superoven)
+  * Added support for CSON rscuration files (@superoven)
 
 1.2.4 / 2014-10-10
 ==================
@@ -307,19 +307,19 @@ and you're not trying to mutate config arrays.
 1.2.2 / 2014-10-03
 ==================
 
-  * Added support for regexp and date configurations (@diversario)
+  * Added support for regexp and date rscurations (@diversario)
 
 1.2.1 / 2014-09-23
 ==================
 
   * Wrote test to prove setModuleDefaults() was broken in 1.2.0
-  * Fixed setModuleDefaults() to not rely on immutable configs
+  * Fixed setModuleDefaults() to not rely on immutable rscs
 
 1.2.0 / 2014-09-15
 ==================
 
   * Feature release
-  * Delaying immutability until after first get() - for external configs
+  * Delaying immutability until after first get() - for external rscs
   * Allowing immutability override with $ALLOW_CONFIG_MUTATIONS=Y
 
 
@@ -350,7 +350,7 @@ and you're not trying to mutate config arrays.
 ===================
 
   * Major revision.  Upgrade notes:
-    https://github.com/lorenwest/node-config/wiki/Upgrading-From-Config-0.x
+    https://github.com/lorenwest/node-rsc/wiki/Upgrading-From-Rsc-0.x
   * Update to semver versioning
   * Change load ordering
       from hostname.EXT --> deployment.EXT
@@ -358,18 +358,18 @@ and you're not trying to mutate config arrays.
   * Allow makeImmutable to accept an array of attributes
   * Allow makeImmutable to accept no attrs, making all attributes immutable
   * Allow recursion in makeImmutable, if an attribute is an object
-  * Change node-config behavior to make all configurations immutable
-  * Removed getOriginalConfig as no longer necessary post-immutable
+  * Change node-rsc behavior to make all rscurations immutable
+  * Removed getOriginalRsc as no longer necessary post-immutable
   * Removed runtime.json file writing and monitoring
-  * Removed previously deprecated $CONFIG_* environment configurations
+  * Removed previously deprecated $CONFIG_* environment rscurations
   * Deprecated the attribute watch functionality
-  * Added error output if no configurations found
-  * Exposed config loading for alternate configurations
-  * Added config.get() and config.has() methods & tests
+  * Added error output if no rscurations found
+  * Exposed rsc loading for alternate rscurations
+  * Added rsc.get() and rsc.has() methods & tests
   * Removed reliance on global.NODE_CONFIG so older versions can work with 1.x
   * Fix empty YAML file causing crash with latest js-yaml
   * Added SUPPRESS_NO_CONFIG_WARNING for better sub-module support
-  * Moved all documentation [to the wiki](https://github.com/lorenwest/node-config/wiki).
+  * Moved all documentation [to the wiki](https://github.com/lorenwest/node-rsc/wiki).
 
 0.4.37 / 2014-07-22
 ===================
@@ -384,7 +384,7 @@ and you're not trying to mutate config arrays.
 0.4.35 / 2014-01-16
 ===================
 
-  * NODE_CONFIG_DIR can now contain a relative path for .js and .coffee configurations
+  * NODE_CONFIG_DIR can now contain a relative path for .js and .coffee rscurations
 
 0.4.34 / 2014-01-06
 ===================
@@ -399,21 +399,21 @@ and you're not trying to mutate config arrays.
 0.4.32 / 2013-10-24
 ===================
 
-  * Don't freak out if running without a config directory
+  * Don't freak out if running without a rsc directory
   * Don't be so chatty if runtime.json doesn't exist
 
 0.4.31 / 2013-10-18
 ===================
 
-  * Changed getConfigSources to copy array vs. object
+  * Changed getRscSources to copy array vs. object
 
 0.4.30 / 2013-09-12
 ===================
 
   * More consistent array extension
-  * No longer requiring a config directory
+  * No longer requiring a rsc directory
   * Not erroneously writing runtime.json
-  * Exposing the original configuration sources
+  * Exposing the original rscuration sources
   * Added --NODE_CONFIG={json} command line overrides
   * Added $NODE_CONFIG={json} environment variable overrides
   * Consistent handling of environment variables and command line parameters
@@ -432,7 +432,7 @@ and you're not trying to mutate config arrays.
 0.4.27 / 2013-06-18
 ===================
 
-  * Fixed a bug preventing double underscores in config environment variables
+  * Fixed a bug preventing double underscores in rsc environment variables
 
 0.4.26 / 2013-06-10
 ===================
@@ -440,12 +440,12 @@ and you're not trying to mutate config arrays.
   * Re-watch file on rename (allows editing runtime.json with vi)
   * Allow runtime.json file watch disable via NODE_CONFIG_DISABLE_FILE_WATCH=Y
   * Change no yaml parser error message to suggest using js-yaml
-  * Changed default clone depth from 6 to 20 to allow for deeper configurations
+  * Changed default clone depth from 6 to 20 to allow for deeper rscurations
 
 0.4.25 / 2013-05-24
 ===================
 
-  * Dont fail if config directory doesnt exist
+  * Dont fail if rsc directory doesnt exist
 
 0.4.24 / 2013-04-13
 ===================
@@ -462,7 +462,7 @@ and you're not trying to mutate config arrays.
 0.4.22 / 2013-03-29
 ===================
 
-  * Added configuration $CONFIG_* environment variables
+  * Added rscuration $CONFIG_* environment variables
   * Added $CONFIG_* documentation and tests
   * Added NodeJS 0.10 integration test
 
@@ -480,7 +480,7 @@ and you're not trying to mutate config arrays.
 0.4.19 / 2013-02-21
 ===================
 
-  * Added discovery of .yml in addition to .yaml for YAML configs (w/doc)
+  * Added discovery of .yml in addition to .yaml for YAML rscs (w/doc)
   * Added testing of .yml file discovery
   * Removed licensing inconsistencies
 
@@ -502,7 +502,7 @@ and you're not trying to mutate config arrays.
 0.4.16 / 2012-08-09
 ===================
 
-  * Allowing a zero interval in watchForConfigFileChanges() to disable file watching.
+  * Allowing a zero interval in watchForRscFileChanges() to disable file watching.
   * Fixed a comparator bug in _equalsDeep()
   * Added a test to confirm deep extending array functionality
 
@@ -514,11 +514,11 @@ and you're not trying to mutate config arrays.
 0.4.14 / 2012-06-01
 ===================
 
-  * Added the local.EXT and local-deployment.EXT configs.
+  * Added the local.EXT and local-deployment.EXT rscs.
   * Removed unnecessary debug output
   * Added retry logic on file parse to reduce read/write collisions
   * Added support for a better YAML parser
-  * Fixed problems with null configuration values
+  * Fixed problems with null rscuration values
 
 0.4.13 / 2012-04-25
 ===================
@@ -551,15 +551,15 @@ and you're not trying to mutate config arrays.
 ==================
 
   * Added coffee-script file type support with extension .coffee
-  * Added an example coffee-script configuration file
+  * Added an example coffee-script rscuration file
   * Added coffee-script module dependency
-  * Added a test for coffee-script configuration files
+  * Added a test for coffee-script rscuration files
   * Documented coffee-script support, regenerated documentation
 
 0.4.8 / 2011-12-20
 ==================
 
-  * Fixed a bug where changes to module default configs weren't persisted
+  * Fixed a bug where changes to module default rscs weren't persisted
   * Added a test to validate the bugfix
 
 0.4.7 / 2011-12-16
@@ -592,18 +592,18 @@ and you're not trying to mutate config arrays.
 0.4.3 / 2011-08-02
 ==================
 
-  * Made watchForConfigFileChanges public
+  * Made watchForRscFileChanges public
 
 0.4.2 / 2011-07-11
 ==================
 
-  * Added comment stripping from JSON configuration files
+  * Added comment stripping from JSON rscuration files
 
 0.4.1 / 2011-07-07
 ==================
 
   * Added more tests
-  * Return the module config in setModuleDefaults
+  * Return the module rsc in setModuleDefaults
 
 0.4.0 / 2011-07-06
 ==================
@@ -611,7 +611,7 @@ and you're not trying to mutate config arrays.
   * Update to version 0.4.0
 
     * Online documentation
-    * Runtime configuration changes
-    * Configuration value watching
+    * Runtime rscuration changes
+    * Rscuration value watching
     * Multi-instance node deployments
     * Better module developer support

@@ -6,21 +6,21 @@ var vows = require('vows'),
     FileSystem = require('fs');
 
 /**
- * <p>Unit tests for the node-config library.  To run type:</p>
+ * <p>Unit tests for the node-rsc library.  To run type:</p>
  * <pre>npm test</pre>
- * <p>Or, in a project that uses node-config:</p>
- * <pre>npm test config</pre>
+ * <p>Or, in a project that uses node-rsc:</p>
+ * <pre>npm test rsc</pre>
  *
- * @class ConfigTest
+ * @class RscTest
  */
 
 var CONFIG, MODULE_CONFIG, override;
-vows.describe('Test suite for node-config')
+vows.describe('Test suite for node-rsc')
 .addBatch({
   'Library initialization': {
     topic : function () {
-      // Change the configuration directory for testing
-      process.env.NODE_CONFIG_DIR = __dirname + '/config';
+      // Change the rscuration directory for testing
+      process.env.NODE_CONFIG_DIR = __dirname + '/rsc';
 
       // Hardcode $NODE_ENV=test for testing
       process.env.NODE_ENV='test';
@@ -36,78 +36,78 @@ vows.describe('Test suite for node-config')
       override = 'CUSTOM VALUE FROM JSON ENV MAPPING';
       process.env.CUSTOM_JSON_ENVIRONMENT_VAR = override;
 
-      CONFIG = requireUncached(__dirname + '/../lib/config');
+      CONFIG = requireUncached(__dirname + '/../lib/rsc');
 
       return CONFIG;
 
     },
-    'Config library is available': function() {
+    'Rsc library is available': function() {
       assert.isObject(CONFIG);
     },
-    'Config extensions are included with the library': function() {
+    'Rsc extensions are included with the library': function() {
       assert.isFunction(CONFIG.util.cloneDeep);
     }
   },
 })
 .addBatch({
-  'Configuration file Tests': {
-    'Loading configurations from a JS module is correct': function() {
+  'Rscuration file Tests': {
+    'Loading rscurations from a JS module is correct': function() {
       assert.equal(CONFIG.Customers.dbHost, 'base');
       assert.equal(CONFIG.TestModule.parm1, 'value1');
     },
 
-    'Loading configurations from a JSON file is correct': function() {
+    'Loading rscurations from a JSON file is correct': function() {
       assert.equal(CONFIG.AnotherModule.parm1, 'value1');
       assert.equal(CONFIG.Inline.a, '');
       assert.equal(CONFIG.Inline.b, '1');
       assert.equal(CONFIG.ContainsQuote, '"this has a quote"');
     },
 
-    'Loading configurations from a .yaml YAML file is correct': function() {
+    'Loading rscurations from a .yaml YAML file is correct': function() {
       assert.equal(CONFIG.AnotherModule.parm2, 'value2');
     },
 
-    'Loading configurations from a .yml YAML file is correct': function() {
+    'Loading rscurations from a .yml YAML file is correct': function() {
       assert.equal(CONFIG.AnotherModule.parm2yml, 'value2yml');
     },
 
-    'Loading configurations from a Coffee-Script file is correct': function() {
+    'Loading rscurations from a Coffee-Script file is correct': function() {
       assert.equal(CONFIG.AnotherModule.parm3, 'value3');
     },
 
-    'Loading configurations from a CSON file is correct': function() {
+    'Loading rscurations from a CSON file is correct': function() {
       assert.equal(CONFIG.AnotherModule.parm4, 'value4');
     },
 
-    'Loading configurations from a .properties file is correct': function() {
+    'Loading rscurations from a .properties file is correct': function() {
       assert.equal(CONFIG.AnotherModule.parm5, 'value5');
     },
 
-    'Loading configurations from a JSON5 file is correct': function() {
+    'Loading rscurations from a JSON5 file is correct': function() {
       assert.equal(CONFIG.AnotherModule.parm6, 'value6');
     },
 
-    'Loading configurations from a TOML file is correct': function() {
+    'Loading rscurations from a TOML file is correct': function() {
       assert.equal(CONFIG.AnotherModule.parm7, 'value7');
     },
 
-    'Loading configurations from a Hjson file is correct': function() {
+    'Loading rscurations from a Hjson file is correct': function() {
       assert.equal(CONFIG.AnotherModule.parm8, 'value8');
     },
 
-    'Loading configurations from a XML file is correct': function() {
+    'Loading rscurations from a XML file is correct': function() {
       assert.equal(CONFIG.AnotherModule.parm9, 'value9');
     },
 
-    'Loading configurations from an environment file is correct': function() {
+    'Loading rscurations from an environment file is correct': function() {
       assert.equal(CONFIG.Customers.dbPort, '5999');
     },
 
-    'Loading configurations from the local file is correct': function() {
+    'Loading rscurations from the local file is correct': function() {
       assert.equal(CONFIG.Customers.dbPassword, 'real password');
     },
 
-    'Loading configurations from the local environment file is correct': function() {
+    'Loading rscurations from the local environment file is correct': function() {
       assert.equal(CONFIG.Customers.dbPassword2, 'another password');
       assert.deepEqual(CONFIG.Customers.lang, ['en','de','es']);
     }
@@ -131,38 +131,38 @@ vows.describe('Test suite for node-config')
     }
   },
 
-  'Configurations from the $NODE_CONFIG environment variable': {
-    'Configuration can come from the $NODE_CONFIG environment': function() {
+  'Rscurations from the $NODE_CONFIG environment variable': {
+    'Rscuration can come from the $NODE_CONFIG environment': function() {
       assert.equal(CONFIG.EnvOverride.parm3, 'overridden from $NODE_CONFIG');
     },
 
-    'Type correct configurations from $NODE_CONFIG': function() {
+    'Type correct rscurations from $NODE_CONFIG': function() {
       assert.equal(CONFIG.EnvOverride.parm4, 100);
     }
 
   },
 
-  'Configurations from the --NODE_CONFIG command line': {
-    'Configuration can come from the --NODE_CONFIG command line argument': function() {
+  'Rscurations from the --NODE_CONFIG command line': {
+    'Rscuration can come from the --NODE_CONFIG command line argument': function() {
       assert.equal(CONFIG.EnvOverride.parm5, 'overridden from --NODE_CONFIG');
     },
 
-    'Type correct configurations from --NODE_CONFIG': function() {
+    'Type correct rscurations from --NODE_CONFIG': function() {
       assert.equal(CONFIG.EnvOverride.parm6, 101);
     }
 
   },
 
-  'Configurations from custom environment variables': {
+  'Rscurations from custom environment variables': {
     // only testing the `custom-environment-variables.json` now
     // NOT testing unset environment variable because of module caching (CONFIG would have to be recreated
     // NOT testing absence of `custom-environment-variables.json` because current tests don't mess with the filesystem
-    'Configuration can come from an environment variable mapped in custom_environment_variables.json': function () {
+    'Rscuration can come from an environment variable mapped in custom_environment_variables.json': function () {
       assert.equal(CONFIG.get('customEnvironmentVariables.mappedBy.json'), override);
     }
   },
 
- 'Assuring a configuration property can be hidden': {
+ 'Assuring a rscuration property can be hidden': {
     topic: function() {
       var object = {
         item1: 23,
@@ -193,7 +193,7 @@ vows.describe('Test suite for node-config')
 
   },
 
-  'Assuring a configuration property can be made immutable': {
+  'Assuring a rscuration property can be made immutable': {
     topic: function() {
 
       CONFIG.util.makeImmutable(CONFIG.TestModule, 'parm1');
@@ -205,7 +205,7 @@ vows.describe('Test suite for node-config')
       assert.isFunction(CONFIG.util.makeImmutable);
     },
 
-    'Correctly unable to change an immutable configuration': function(value) {
+    'Correctly unable to change an immutable rscuration': function(value) {
       assert.isTrue(value != "setToThis");
     },
 
@@ -214,8 +214,8 @@ vows.describe('Test suite for node-config')
     }
   },
 
-  'Assuring a configuration array property can be made immutable': {
-    'Correctly unable to change an immutable configuration': function() {
+  'Assuring a rscuration array property can be made immutable': {
+    'Correctly unable to change an immutable rscuration': function() {
       CONFIG.util.makeImmutable(CONFIG.TestModule, 'arr1');
       CONFIG.TestModule.arr1 = ['bad value'];
       assert.isTrue(CONFIG.TestModule.arr1[0] == 'arrValue1');
@@ -261,31 +261,31 @@ vows.describe('Test suite for node-config')
     'A proper exception is thrown on mis-spellings': function() {
       assert.throws(
         function () { CONFIG.get('mis.spelled'); },
-        /Configuration property "mis.spelled" is not defined/
+        /Rscuration property "mis.spelled" is not defined/
       );
     },
     'An exception is thrown on non-objects': function() {
       assert.throws(
           function () { CONFIG.get('Testmodule.misspelled'); },
-          /Configuration property "Testmodule.misspelled" is not defined/
+          /Rscuration property "Testmodule.misspelled" is not defined/
       );
     },
     'get(undefined) throws an exception': function() {
       assert.throws(
           function () { CONFIG.get(undefined); },
-          /Calling config.get with null or undefined argument/
+          /Calling rsc.get with null or undefined argument/
       );
     },
     'get(null) throws an exception': function() {
       assert.throws(
           function () { CONFIG.get(null); },
-          /Calling config.get with null or undefined argument/
+          /Calling rsc.get with null or undefined argument/
       );
     },
     "get('') throws an exception": function() {
       assert.throws(
           function () { CONFIG.get(''); },
-          /Configuration property "" is not defined/
+          /Rscuration property "" is not defined/
       );
     },
   },
@@ -324,9 +324,9 @@ vows.describe('Test suite for node-config')
     },
   },
 
-  'Configuration for module developers': {
+  'Rscuration for module developers': {
     topic: function() {
-      MODULE_CONFIG = requireUncached(__dirname + '/../lib/config');
+      MODULE_CONFIG = requireUncached(__dirname + '/../lib/rsc');
 
       // Set some parameters for the test module
       return MODULE_CONFIG.util.setModuleDefaults("TestModule", {
@@ -342,26 +342,26 @@ vows.describe('Test suite for node-config')
       assert.isFunction(MODULE_CONFIG.util.setModuleDefaults);
     },
 
-    'The module config is in the CONFIG object': function(moduleConfig) {
+    'The module rsc is in the CONFIG object': function(moduleRsc) {
       assert.isObject(MODULE_CONFIG.TestModule);
-      assert.deepEqual(MODULE_CONFIG.TestModule, moduleConfig);
+      assert.deepEqual(MODULE_CONFIG.TestModule, moduleRsc);
     },
 
-    // Regression test for https://github.com/lorenwest/node-config/issues/518
-    'The module config did not extend itself with its own name': function(moduleConfig) {
-      assert.isFalse('TestModule' in moduleConfig);
+    // Regression test for https://github.com/lorenwest/node-rsc/issues/518
+    'The module rsc did not extend itself with its own name': function(moduleRsc) {
+      assert.isFalse('TestModule' in moduleRsc);
       assert.isFalse('TestModule' in MODULE_CONFIG.TestModule);
     },
 
-    'Local configurations are mixed in': function(moduleConfig) {
-      assert.equal(moduleConfig.parm1, "value1");
+    'Local rscurations are mixed in': function(moduleRsc) {
+      assert.equal(moduleRsc.parm1, "value1");
     },
 
-    'Defaults remain intact unless overridden': function(moduleConfig) {
-      assert.equal(moduleConfig.parm2, 2000);
+    'Defaults remain intact unless overridden': function(moduleRsc) {
+      assert.equal(moduleRsc.parm2, 2000);
     },
 
-    'Prototypes are applied by setModuleDefaults even if no previous config exists for the module': function() {
+    'Prototypes are applied by setModuleDefaults even if no previous rsc exists for the module': function() {
       var BKTestModuleDefaults = {
         parm1: 1000, parm2: 2000, parm3: 3000,
         nested: {
@@ -380,11 +380,11 @@ vows.describe('Test suite for node-config')
       MODULE_CONFIG.util.setModuleDefaults('BKTestModule', BKTestModuleDefaults);
       MODULE_CONFIG.util.setModuleDefaults('services.OtherTestModule', OtherTestModuleDefaults);
 
-      var testModuleConfig = MODULE_CONFIG.get('BKTestModule');
-      var testSubModuleConfig = MODULE_CONFIG.get('services');
+      var testModuleRsc = MODULE_CONFIG.get('BKTestModule');
+      var testSubModuleRsc = MODULE_CONFIG.get('services');
 
-      assert.deepEqual(BKTestModuleDefaults.nested, testModuleConfig.get('nested'));
-      assert.deepEqual(OtherTestModuleDefaults.other, testSubModuleConfig.OtherTestModule.other);
+      assert.deepEqual(BKTestModuleDefaults.nested, testModuleRsc.get('nested'));
+      assert.deepEqual(OtherTestModuleDefaults.other, testSubModuleRsc.OtherTestModule.other);
     }
   },
 })

@@ -1,6 +1,6 @@
 
-var config = {
+var rsc = {
   siteName : 'local site name',
 };
 
-module.exports = config;
+module.exports = rsc;

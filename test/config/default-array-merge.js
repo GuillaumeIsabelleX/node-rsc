@@ -1,7 +1,7 @@
 
-var defer = require('../../defer').deferConfig;
+var defer = require('../../defer').deferRsc;
 
-var config = {
+var rsc = {
   arrayMerging: {
     emptyArray : [],
     oneItem   : ['one'],
@@ -9,4 +9,4 @@ var config = {
   },
 };
 
-module.exports = config;
+module.exports = rsc;

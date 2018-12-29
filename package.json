@@ -1,16 +1,16 @@
 {
   "name": "node-rsc",
-  "version": "0.0.2",
-  "main": "./lib/config.js",
-  "description": "Really Simple Content Configuration control for production node deployments",
+  "version": "0.0.5",
+  "main": "./lib/rsc.js",
+  "description": "Really Simple Content Rscuration control for production node deployments",
   "author": "Guillaume Isabelle",
   "homepage": "https://github.com/GuillaumeIsabelleX",
   "keywords": [
     "conf",
-    "config",
-    "configuration",
-    "node-config",
-    "config-node",
+    "rsc",
+    "rscuration",
+    "node-rsc",
+    "rsc-node",
     "env",
     "environment"
   ],
